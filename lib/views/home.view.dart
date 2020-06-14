@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:the_good_bot/models/receitas.model.dart';
 import 'package:the_good_bot/repository/receitas.repository.dart';
 import 'package:the_good_bot/views/navbar.view.dart';
+import 'package:the_good_bot/views/receita.view.dart';
+
+import 'appbar.view.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -13,34 +16,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(),
-      appBar: AppBar(
-        bottom: PreferredSize(
-          child: Container(
-            color: Colors.white,
-            height: 1,
-          ),
-          preferredSize: Size.fromHeight(1.0),
-        ),
-        backgroundColor: Color(0xFF3C444C),
-        // leading: FlatButton(
-        //   child: Icon(
-        //     Icons.menu,
-        //     color: Theme.of(context).accentColor,
-        //   ),
-        //   onPressed: (){
-        //     return NavBar();
-        //   },
-        // ),
-        centerTitle: true,
-        title: Text(
-          "Receitas do chef",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 24
-          ),
-        ),
-      ),
+      appBar: appBar("Receitas do Chef"),
       body: FutureBuilder(
         future: ReceitasRepository().getReceitasAleatorias(),
         builder: (context, snapshot) {
@@ -105,13 +81,13 @@ class _HomeViewState extends State<HomeView> {
             color: Theme.of(context).primaryColor,
           ),
           onTap: () {
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => DetailsView(
-            //         receita: receita,
-            //       ),
-            //     ));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ReceitaInfo(
+                    receita: receita,
+                  ),
+                ));
           },
         ),
       ),

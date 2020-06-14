@@ -7,10 +7,13 @@ class Receita {
   factory Receita.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['secao'] as List;
     List<Info> listInfos = list.map((i) => Info.fromJson(i)).toList();
-    
+    var idBruto = parsedJson['_id'];
+    var id = idBruto['\$oid'];
+
     return Receita(
       nome: parsedJson['nome'] as String,
-      listInfos: listInfos
+      listInfos: listInfos,
+      id: id
       );
   }
 }
