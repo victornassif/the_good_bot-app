@@ -1,8 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:the_good_bot/components/appbar.widget.dart';
 import 'package:the_good_bot/models/receitas.model.dart';
-
-import 'appbar.view.dart';
 
 class ReceitaInfo extends StatefulWidget {
   final Receita receita;

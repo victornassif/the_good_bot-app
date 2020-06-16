@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:the_good_bot/themes/style.dart';
 import 'package:the_good_bot/views/home.view.dart';
-import 'package:the_good_bot/views/style.dart';
+import 'package:the_good_bot/views/login.view.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: HomeView(),
+      home: LoginView(),
     );
   }
 }

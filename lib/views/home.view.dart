@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:the_good_bot/components/appbar.widget.dart';
+import 'package:the_good_bot/components/navbar.widget.dart';
 import 'package:the_good_bot/models/receitas.model.dart';
 import 'package:the_good_bot/repository/receitas.repository.dart';
-import 'package:the_good_bot/views/navbar.view.dart';
 import 'package:the_good_bot/views/receita.view.dart';
-
-import 'appbar.view.dart';
 
 class HomeView extends StatefulWidget {
   @override

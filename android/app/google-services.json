@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "900356076161",
+    "firebase_url": "https://the-good-bot-b013d.firebaseio.com",
+    "project_id": "the-good-bot-b013d",
+    "storage_bucket": "the-good-bot-b013d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900356076161:android:fee8272df0a9fb229a9380",
+        "android_client_info": {
+          "package_name": "io.nassif.goodbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900356076161-5jrnif88hua60hmet988r3en2nnk36m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.nassif.goodbot",
+            "certificate_hash": "e370d58eebb6cbd8bf358d5cbbf7f607c48c4de5"
+          }
+        },
+        {
+          "client_id": "900356076161-rkvfg3gh295f1cq0p40vcpm76eafgq93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8c4rUqRBUxzVc-VSvXtGny1sctsHNBbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900356076161-rkvfg3gh295f1cq0p40vcpm76eafgq93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
