@@ -15,7 +15,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(),
-      appBar: appBar("Receitas do Chef"),
+      appBar: appBar("Sugestões do ChefBot"),
       body: FutureBuilder(
         future: ReceitasRepository().getReceitasAleatorias(),
         builder: (context, snapshot) {

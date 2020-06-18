@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_good_bot/controllers/login.controller.dart';
+import 'package:the_good_bot/views/chat.view.dart';
 import 'package:the_good_bot/views/login.view.dart';
 
 class NavBar extends StatefulWidget {
@@ -29,7 +30,14 @@ class _NavBarState extends State<NavBar> {
               'chat',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            onTap: null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatView(),
+                ),
+              );
+            },
           ),
           ListTile(
             trailing: Icon(Icons.exit_to_app),

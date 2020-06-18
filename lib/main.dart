@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:the_good_bot/themes/style.dart';
-import 'package:the_good_bot/views/home.view.dart';
 import 'package:the_good_bot/views/login.view.dart';
 
 void main() => runApp(MyApp());

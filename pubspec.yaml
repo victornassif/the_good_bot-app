@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: 0.12.0+4
+  flutter_dialogflow: ^0.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -45,9 +46,13 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-assets:
-  - assets/images/google.png
-  - assets/images/baking.png
+  assets:
+    - assets/images/google.png
+    - assets/images/baking.png
+    - assets/images/chefbot.jpg
+    - assets/credentials/credentials.json
+    - assets/credentials/thegoodbot-dwdqmt-3df7a74d8bce.json
+
 
 fonts:
   family: Poppins

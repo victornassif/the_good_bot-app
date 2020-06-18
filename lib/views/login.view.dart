@@ -51,38 +51,45 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(30),
-          child: GBBusy(
-            busy: busy,
-            child: Card(
+      body: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+        child: GBBusy(
+          busy: busy,
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
               child: Column(
                 children: <Widget>[
                   SizedBox(
                     width: double.infinity,
                   ),
-                  // Container(
-                  //   width: 60,
-                  //   height: 80,
-                  //   decoration: BoxDecoration(
-                  //     image: DecorationImage(
-                  //       image: AssetImage('assets/images/baking.png'),
-                  //     ),
-                  //   ),
-                  // ),
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/chefbot.jpg'),
+                      ),
+                    ),
+                  ),
                   Text(
-                    "Olá Chef!",
+                    "Olá, chef!",
                     style: TextStyle(
                       fontSize: 20,
                     ),
                   ),
+                  Text(
+                    "Faça login para continuar",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100),
+                  ),
                   SizedBox(
-                    height: 20,
+                    height: 60,
                   ),
                   GBButton(
                     text: "Login com Google",
-                    // image: "assets/images/google.png",
+                    image: "assets/images/google.png",
                     callback: () {
                       handleSignIn();
                     },

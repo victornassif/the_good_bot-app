@@ -14,7 +14,7 @@ AppBar appBar(name) {
     title: Text(
       name,
       style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
     ),
   );
 }
