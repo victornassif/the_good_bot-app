@@ -3,8 +3,9 @@ import 'package:the_good_bot/user.dart';
 import 'package:the_good_bot/utils/tipoMensagem.enum.dart';
 
 class ChatMessage extends StatefulWidget {
-  ChatMessage({this.text, this.name, this.type});
+  ChatMessage({this.text, this.name, this.type, this.date});
 
+  final DateTime date;
   final String text;
   final String name;
   final TipoMensagem type;

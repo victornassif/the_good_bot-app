@@ -26,7 +26,6 @@ class ReceitasRepository {
   Future<List<Receita>> getReceitaFromTermo(String termo) async {
     String query = 'q=' + termo;
     List<Receita> list = await getReceitaFromRepository(query);
-
     return list.length > 3 ? list.take(3).toList() : list.toList();
   }
 }
