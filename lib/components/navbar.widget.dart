@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_good_bot/controllers/login.controller.dart';
-import 'package:the_good_bot/views/chat.test.view.dart';
+import 'package:the_good_bot/views/chat.view.dart';
 import 'package:the_good_bot/views/login.view.dart';
 
 class NavBar extends StatefulWidget {
@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChatTestView(),
+                  builder: (context) => ChatView(),
                 ),
               );
             },

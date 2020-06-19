@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:flutter/material.dart';
 import 'package:the_good_bot/components/chat.widget.dart';
@@ -15,8 +18,10 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatView extends State<ChatView> {
-  final List<ChatMessage> _messages = <ChatMessage>[];
-  final TextEditingController _textController = TextEditingController();
+  List<ChatMessage> _messages = <ChatMessage>[];
+  TextEditingController _textController = TextEditingController();
+  Firestore databaseReference = Firestore.instance;
+  final _streamController = StreamController<List<ChatMessage>>();
 
   Widget _buildTextComposer() {
     return IconTheme(
@@ -71,6 +76,7 @@ class _ChatView extends State<ChatView> {
       text: response.getMessage() ??
           CardDialogflow(response.getListMessage()[0]).title,
       name: "ChefBot",
+      date: DateTime.now(),
       type: TipoMensagem.other,
     );
     enviarMensagem(message);
@@ -85,7 +91,8 @@ class _ChatView extends State<ChatView> {
       if (str.length > 0) {
         ChatMessage novaMensagem = ChatMessage(
           name: "ChefBot",
-          type: TipoMensagem.receita,
+          type: TipoMensagem.other,
+          date: DateTime.now(),
           text: "Encontrei ${str.length} receitas para você.",
         );
         enviarMensagem(novaMensagem);
@@ -104,7 +111,8 @@ class _ChatView extends State<ChatView> {
 
         ChatMessage novaMensagem = ChatMessage(
           name: "ChefBot",
-          type: TipoMensagem.receita,
+          type: TipoMensagem.other,
+          date: DateTime.now(),
           text: sb.toString(),
         );
         enviarMensagem(novaMensagem);
@@ -113,9 +121,53 @@ class _ChatView extends State<ChatView> {
   }
 
   void enviarMensagem(ChatMessage message) {
-    setState(() {
-      _messages.insert(0, message);
+    _messages.insert(0, message);
+    _streamController.add(_messages);
+    _add(message);
+  }
+
+  void _add(ChatMessage q) async {
+    Map<String, dynamic> data = <String, dynamic>{
+      'userToken': q.type == TipoMensagem.other ? 'chefbot' : 'user',
+      'message': q.text,
+      'username': q.type == TipoMensagem.other ? 'ChefBot' : user.name,
+      'date': DateTime.now()
+    };
+
+    await databaseReference
+        .collection('chat')
+        .add(data)
+        .whenComplete(() => print('msg added'))
+        .catchError((e) => print('deu ruim: $e'));
+  }
+
+  getData() async {
+    List<ChatMessage> mensagens = <ChatMessage>[];
+    QuerySnapshot collectionSnapshot = await databaseReference
+        .collection('chat')
+        .orderBy('date', descending: true)
+        .getDocuments();
+
+    var col = collectionSnapshot.documents;
+
+    col.forEach((e) {
+      var ch = ChatMessage(
+        text: e.data['message'],
+        type: e.data['userToken'] == 'user'
+            ? TipoMensagem.user
+            : TipoMensagem.other,
+        name: e.data['username'],
+      );
+      mensagens.add(ch);
+      _messages.add(ch);
     });
+    _streamController.add(mensagens);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override
@@ -125,20 +177,31 @@ class _ChatView extends State<ChatView> {
         centerTitle: true,
         title: Text("ChefBot"),
       ),
-      body: Column(children: <Widget>[
-        Flexible(
-            child: ListView.builder(
-          padding: EdgeInsets.all(8.0),
-          reverse: true,
-          itemBuilder: (_, int index) => _messages[index],
-          itemCount: _messages.length,
-        )),
-        Divider(height: 1.0),
-        Container(
-          decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          child: _buildTextComposer(),
-        ),
-      ]),
+      body: StreamBuilder(
+          stream: _streamController.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text('Deu ruim'),
+              );
+            }
+            return Column(children: <Widget>[
+              Flexible(
+                  child: ListView.builder(
+                reverse: true,
+                itemCount: snapshot.data == null ? 0 : snapshot.data.length,
+                itemBuilder: (BuildContext ctx, int index) {
+                  return _messages[index];
+                },
+              )),
+              Divider(height: 1.0),
+              Container(
+                decoration:
+                    BoxDecoration(color: Theme.of(context).primaryColor),
+                child: _buildTextComposer(),
+              )
+            ]);
+          }),
     );
   }
 }
